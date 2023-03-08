@@ -1,0 +1,39 @@
+nl:
+  activerecord:
+    models:
+      order: Bestelling
+      order_form: Bestelformulier
+      order_line: Bestelregel
+    attributes:
+      order:
+        name: Naam
+        email: E-mail
+        phone: Telefoon
+        comment: Opmerking
+        order_lines: Inhoud van de bestelling
+      order_line:
+        amount: Aantal
+        product: Product
+        unit_price: Prijs per stuk
+        subtotal: Bedrag
+  orders:
+    new:
+      new_order: Nieuwe bestelling
+    form:
+      errors_prohibited_saving:
+        one: "1 fout voorkomt dat uw bestelling geplaatst kan worden"
+        other: "%{count} fouten voorkomen dat uw bestelling geplaatst kan worden"
+    show:
+      please_transfer_html:
+        "Schrijf alstublieft €%{amount} over naar <code>%{iban}</code> om uw bestelling te bevestigen."
+    order:
+      order_title: Bestelling %{form_title}
+      permalink: Vaste link naar uw bestelling, bewaar deze link om uw bestelling later terug op te vragen.
+      contact_information: "Contactinformatie:"
+      order_contents: "Inhoud van de bestelling:"
+      comment: "Opmerking:"
+  order_forms:
+    index:
+      order_forms: Bestelformulieren
+  total: Totaal
+

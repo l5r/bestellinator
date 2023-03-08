@@ -23,9 +23,14 @@ gem 'cancancan'
 gem 'paper_trail'
 gem 'paper_trail-association_tracking'
 gem 'devise-i18n'
+gem 'rails-i18n', '~> 7.0.0'
 
 gem 'phonelib'
 gem 'stripe-rails'
+
+gem "sassc-rails"
+gem "bootstrap", "~> 5.0"
+gem "bootstrap_form", "~> 5.1"
 
 group :production do
   gem "postmark-rails"
@@ -64,4 +69,3 @@ group :test do
   gem "shoulda-matchers"
   gem "webdrivers"
 end
-gem "sassc-rails"

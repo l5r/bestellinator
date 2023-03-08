@@ -3,8 +3,7 @@
 
 <article>
   <p>
-    Please transfer €<%= @order.total_price %> to <code><%= @order.order_form.iban %></code>
-  to finish your order
+    <%= t '.please_transfer_html', amount: @order.total_price, iban: @order.order_form.iban %>
   </p>
 </article>
 

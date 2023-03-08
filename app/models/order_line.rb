@@ -25,6 +25,10 @@ class OrderLine < ApplicationRecord
   belongs_to :product
   has_paper_trail
 
+  after_initialize do
+    amount ||= 0
+  end
+
   validates :amount, presence: true
   validates :product_id, uniqueness: {scope: :order_id}
 

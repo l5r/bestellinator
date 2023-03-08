@@ -1,14 +1,14 @@
 <div id="<%= dom_id order %>">
   <hgroup>
-  <h2><%= order.order_form.title %> Order</h2>
-  <h3><%= link_to "Permalink to view this order at any time", order %></h3>
+  <h2><%= t '.order_title', form_title: order.order_form.title %></h2>
+  <h3><%= link_to t('.permalink'), order %></h3>
   </hgroup>
 
   <p>
     <%= order.order_form.thanks %>
   </p>
 
-  <h3>Contact information</h3>
+  <h3><%= t '.contact_information' %></h3>
   <address>
     <%= order.name %><br>
     <%= order.phone %><br>
@@ -16,14 +16,14 @@
   </address>
 
   <p>
-    <h3>Order contents:</h3>
+    <h3><%= t '.order_contents' %></h3>
     <table>
       <thead>
         <th scope="col"></th>
-        <th scope="col">Amount</th>
-        <th scope="col">Product</th>
-        <th scope="col">Unit price</th>
-        <th scope="col">Subtotal</th>
+        <th scope="col"><%= OrderLine.human_attribute_name :amount %></th>
+        <th scope="col"><%= OrderLine.human_attribute_name :product %></th>
+        <th scope="col"><%= OrderLine.human_attribute_name :unit_price %></th>
+        <th scope="col"><%= OrderLine.human_attribute_name :subtotal %></th>
       </thead>
       <tbody>
         <% for order_line in order.order_lines do %>
@@ -38,7 +38,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td>Total</td>
+          <td><%= t :total %></td>
           <td><%= order.total_amount %></td>
           <td colspan="2"></td>
           <td>€<%= order.total_price %></td>
@@ -47,7 +47,7 @@
     </table>
   </p>
 
-  <h3>Comment:</h3>
+  <h3><%= t '.comment' %></h3>
   <p>
     <%= order.comment %>
   </p>

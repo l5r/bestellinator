@@ -2,7 +2,7 @@
 <% content_for :breadcrumb do %>
   <li><%= @order.order_form.title %></li>
 <% end %>
-<h1>New order</h1>
+<h1><%= t '.new_order' %></h1>
 
 <%= render "form", order: @order, order_form: @order.order_form %>
 

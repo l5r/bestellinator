@@ -218,6 +218,19 @@
     targets = [];
     version = "2.4.2";
   };
+  autoprefixer-rails = {
+    dependencies = ["execjs"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0hax4yd41f61ypfs7f0snjzbcgpp19s9d2i0bv4hyjv21kkdz736";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "10.4.13.0";
+  };
   bcrypt = {
     groups = ["default"];
     platforms = [];
@@ -267,6 +280,32 @@
     };
     targets = [];
     version = "1.16.0";
+  };
+  bootstrap = {
+    dependencies = ["autoprefixer-rails" "popper_js" "sassc-rails"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1w0p1yisksl1nfzhw964scsx1wvb0pr5r82h8qd1h8v16m6pfdr0";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "5.2.3";
+  };
+  bootstrap_form = {
+    dependencies = ["actionpack" "activemodel"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0y2c0ddayfll5mlp5hl1kbi95lmizz19fwv4r9lm94a471f8sj7g";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "5.1.0";
   };
   brakeman = {
     groups = ["development"];
@@ -478,6 +517,18 @@
     };
     targets = [];
     version = "1.12.0";
+  };
+  execjs = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "121h6af4i6wr3wxvv84y53jcyw2sk71j5wsncm6wq6yqrwcrk4vd";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "2.8.1";
   };
   factory_bot = {
     dependencies = ["activesupport"];
@@ -960,6 +1011,18 @@
     targets = [];
     version = "0.7.7";
   };
+  popper_js = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "03xxwmf8r7kr593yr26nag6ddmpvpawsx2ci99jfk4mi82d62mck";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "2.11.6";
+  };
   postmark = {
     dependencies = ["json"];
     groups = ["default" "production"];
@@ -1099,6 +1162,19 @@
     };
     targets = [];
     version = "1.5.0";
+  };
+  rails-i18n = {
+    dependencies = ["i18n" "railties"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0wc479kpdljdaq2dyxjldpmzqcg4mqf10n9d2w7s7qnmmb4b957p";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "7.0.6";
   };
   rails_admin = {
     dependencies = ["activemodel-serializers-xml" "kaminari" "nested_form" "rails" "turbo-rails"];

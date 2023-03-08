@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   def new
     @order = Order.new(order_form: @order_form)
     @order_form.products.each do |product|
-      @order.order_lines.build(product: product)
+      @order.order_lines.build(product: product, amount: 0)
     end
   end
 
