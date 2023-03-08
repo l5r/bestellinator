@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :set_order_form, only: %i[ new ]
+  before_action :set_order_form, only: %i[ new create ]
 
   # GET /orders
   def index
@@ -27,9 +27,11 @@ class OrdersController < ApplicationController
   # POST /orders
   def create
     @order = Order.new(order_params)
-    @order.order_form_id = params[:order_form_id]
+    @order.order_form = @order_form
 
-    if @order.save
+    if @order_form.is_closed?
+      redirect_to :root, alert: "This form has been closed"
+    elsif @order.save
       redirect_to @order
     else
       render :new, status: :unprocessable_entity

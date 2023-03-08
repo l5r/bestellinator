@@ -22,6 +22,7 @@
 class Order < ApplicationRecord
   belongs_to :order_form
   has_many :order_lines, dependent: :destroy
+  has_many :payments, dependent: :restrict_with_error
   has_paper_trail
 
   before_save :normalize_phone

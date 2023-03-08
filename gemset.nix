@@ -416,6 +416,19 @@
     targets = [];
     version = "4.9.0";
   };
+  devise-i18n = {
+    dependencies = ["devise"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "07anqw0yi8ls72wnjfj22gn7xn36nmrf21dal7l36c4r8k7qql7d";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "1.11.0";
+  };
   dotenv = {
     groups = ["default" "development" "test"];
     platforms = [];
@@ -1441,6 +1454,31 @@
     };
     targets = [];
     version = "1.2.1";
+  };
+  stripe = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1576cxsl3fkf2m92pq6xlwpb1vjg272apwrwddd64hy5pl6mmdgz";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "8.3.0";
+  };
+  stripe-rails = {
+    dependencies = ["rails" "responders" "stripe"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "08d6al9jamf415fq5ggakp9vrynpx99a7497jmc9c0sbzyx06sxf";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "2.4.0";
   };
   syntax_suggest = {
     groups = ["development" "test"];

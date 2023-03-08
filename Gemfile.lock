@@ -121,6 +121,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.11.0)
+      devise (>= 4.9.0)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -322,6 +324,11 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    stripe (8.3.0)
+    stripe-rails (2.4.0)
+      rails (>= 5.1)
+      responders
+      stripe (>= 3.15.0)
     syntax_suggest (1.0.2)
     thor (1.2.1)
     tilt (2.1.0)
@@ -368,6 +375,7 @@ DEPENDENCIES
   capybara
   capybara-lockstep
   devise
+  devise-i18n
   dotenv-rails
   erb_lint
   factory_bot_rails
@@ -398,6 +406,7 @@ DEPENDENCIES
   sidekiq
   sprockets-rails
   stimulus-rails
+  stripe-rails
   syntax_suggest
   turbo-rails
   web-console

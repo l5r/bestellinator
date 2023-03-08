@@ -19,4 +19,17 @@ class OrderForm < ApplicationRecord
   scope :submittable, -> { where("opens_at < now() AND now() < closes_at") }
 
   validates :title, presence: true
+
+  def is_open?
+    DateTime.now.between? opens_at, closes_at
+  end
+  def is_closed?
+    !is_open?
+  end
+
+  rails_admin do
+    list do
+      scopes [:submittable, nil]
+    end
+  end
 end

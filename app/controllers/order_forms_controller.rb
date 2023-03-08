@@ -8,6 +8,7 @@ class OrderFormsController < ApplicationController
 
   # GET /order_forms/1
   def show
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # GET /order_forms/new

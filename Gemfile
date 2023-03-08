@@ -22,8 +22,10 @@ gem 'devise'
 gem 'cancancan'
 gem 'paper_trail'
 gem 'paper_trail-association_tracking'
+gem 'devise-i18n'
 
-gem "phonelib"
+gem 'phonelib'
+gem 'stripe-rails'
 
 group :production do
   gem "postmark-rails"

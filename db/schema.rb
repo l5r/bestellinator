@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_180134) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_203010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "payment_kind", ["cash", "wire_transfer", "stripe"]
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_180134) do
     t.datetime "closes_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "iban"
   end
 
   create_table "order_lines", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -81,6 +86,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_180134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_form_id"], name: "index_orders_on_order_form_id"
+  end
+
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.enum "kind", enum_type: "payment_kind"
+    t.decimal "amount", precision: 10, scale: 4, null: false
+    t.uuid "order_id", null: false
+    t.string "reference"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -135,5 +150,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_180134) do
   add_foreign_key "order_lines", "orders"
   add_foreign_key "order_lines", "products"
   add_foreign_key "orders", "order_forms"
+  add_foreign_key "payments", "orders"
   add_foreign_key "products", "order_forms"
 end

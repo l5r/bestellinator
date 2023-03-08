@@ -1,3 +1,10 @@
 <% content_for :title, @order.order_form.title %>
 <%= render @order %>
 
+<article>
+  <p>
+    Please transfer €<%= @order.total_price %> to <code><%= @order.order_form.iban %></code>
+  to finish your order
+  </p>
+</article>
+
