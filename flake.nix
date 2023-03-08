@@ -15,6 +15,8 @@
     ]
       (system:
         let
+          name = "bestellinator";
+
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ bob-ruby.overlays.default ];
@@ -46,7 +48,8 @@
 
           inherit (rubyNix {
             name = "bestellinator";
-            gemset = finalGemset;
+            inherit gemset;
+            #gemset = finalGemset;
             ruby = pkgs."ruby-3.2.1";
             gemConfig = pkgs.defaultGemConfig // gemConfig;
           })
@@ -84,5 +87,53 @@
               ${pkgs.postgresql}/bin/pg_ctl start -l $PGLOG -o "--unix_socket_directories='$PGHOST'"
             fi
           '';
+
+          packages.bestellinator = pkgs.stdenv.mkDerivation {
+            inherit name;
+
+            buildInputs = [ env ];
+            nativeBuildInputs = [ pkgs.makeWrapper pkgs.nodejs-19_x ];
+            src = ./.;
+            outputs = [ "out" "public" ];
+
+            RAILS_ENV = "production";
+            BUNDLE_WITHOUT = "test:development";
+
+            buildPhase = ''
+              export SECRET_KEY_BASE="$(rails secret)"
+              rails assets:precompile
+            '';
+
+            installPhase = ''
+              mkdir -p $out/{bin,share}
+              mkdir -p $public
+              cp -r ./{app,config,public,config.ru,Rakefile,lib,db,Gemfile,Gemfile.lock} $out/share/
+              cp -r ./public/* $public/
+              ln -s /tmp/${name} $out/share/tmp
+
+              makeWrapper ${env}/bin/rake $out/bin/${name}-rake \
+                --set-default RAILS_ENV "$RAILS_ENV" \
+                --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
+                --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
+                --add-flags "-I $out/share" \
+                --add-flags "-r $out/share/config/application.rb" \
+                --add-flags "-f $out/share/Rakefile" \
+
+              makeWrapper ${env}/bin/puma $out/bin/${name}-puma \
+                --set-default RAILS_ENV "$RAILS_ENV" \
+                --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
+                --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
+                --set-default PIDFILE "/tmp/${name}/server.pid" \
+                --add-flags "-C $out/share/config/puma.rb" \
+                --add-flags "$out/share/config.ru" \
+
+              makeWrapper ${env}/bin/rails $out/bin/${name}-rails \
+                --set-default RAILS_ENV "$RAILS_ENV" \
+                --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
+                --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
+                --add-flags "-r ${ruby}/bin/ruby"\
+
+            '';
+          };
         });
 }

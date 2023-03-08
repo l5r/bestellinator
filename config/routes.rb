@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :payments
+  # resources :payments
   resources :order_forms, only: [ :index ] do
     resources :orders, only: [:new, :create]
   end
