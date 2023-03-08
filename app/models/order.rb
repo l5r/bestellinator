@@ -22,6 +22,7 @@
 class Order < ApplicationRecord
   belongs_to :order_form
   has_many :order_lines, dependent: :destroy
+  has_paper_trail
 
   before_save :normalize_phone
 
@@ -39,6 +40,13 @@ class Order < ApplicationRecord
     else
       parsed.full_international
     end
+  end
+
+  def total_price
+    order_lines.map(&:subtotal).sum
+  end
+  def total_amount
+    order_lines.map(&:amount).sum
   end
 
   private

@@ -18,4 +18,7 @@
 #  fk_rails_...  (order_form_id => order_forms.id)
 #
 class Product < ApplicationRecord
+  belongs_to :product
+  has_many :order_lines
+  has_paper_trail
 end

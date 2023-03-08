@@ -3,7 +3,7 @@ class OrderFormsController < ApplicationController
 
   # GET /order_forms
   def index
-    @order_forms = OrderForm.all
+    @order_forms = OrderForm.submittable
   end
 
   # GET /order_forms/1
@@ -12,37 +12,27 @@ class OrderFormsController < ApplicationController
 
   # GET /order_forms/new
   def new
-    @order_form = OrderForm.new
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # GET /order_forms/1/edit
   def edit
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # POST /order_forms
   def create
-    @order_form = OrderForm.new(order_form_params)
-
-    if @order_form.save
-      redirect_to @order_form, notice: "Order form was successfully created."
-    else
-      render :new, status: :unprocessable_entity
-    end
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # PATCH/PUT /order_forms/1
   def update
-    if @order_form.update(order_form_params)
-      redirect_to @order_form, notice: "Order form was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # DELETE /order_forms/1
   def destroy
-    @order_form.destroy
-    redirect_to order_forms_url, notice: "Order form was successfully destroyed."
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   private

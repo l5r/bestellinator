@@ -23,7 +23,16 @@
 class OrderLine < ApplicationRecord
   belongs_to :order
   belongs_to :product
+  has_paper_trail
 
   validates :amount, presence: true
   validates :product_id, uniqueness: {scope: :order_id}
+
+  def title
+    "#{amount} × #{product.title}"
+  end
+
+  def subtotal
+    amount * product.price
+  end
 end

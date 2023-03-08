@@ -1,26 +1,54 @@
 <div id="<%= dom_id order %>">
-  <p>
-    <strong>Order form:</strong>
-    <%= order.order_form_id %>
-  </p>
+  <hgroup>
+  <h2><%= order.order_form.title %> Order</h2>
+  <h3><%= link_to "Permalink to view this order at any time", order %></h3>
+  </hgroup>
 
   <p>
-    <strong>Name:</strong>
-    <%= order.name %>
+    <%= order.order_form.thanks %>
   </p>
 
-  <p>
-    <strong>Email:</strong>
+  <h3>Contact information</h3>
+  <address>
+    <%= order.name %><br>
+    <%= order.phone %><br>
     <%= order.email %>
-  </p>
+  </address>
 
   <p>
-    <strong>Phone:</strong>
-    <%= order.phone %>
+    <h3>Order contents:</h3>
+    <table>
+      <thead>
+        <th scope="col"></th>
+        <th scope="col">Amount</th>
+        <th scope="col">Product</th>
+        <th scope="col">Unit price</th>
+        <th scope="col">Subtotal</th>
+      </thead>
+      <tbody>
+        <% for order_line in order.order_lines do %>
+          <tr>
+            <td></td>
+            <td><%= order_line.amount %></td>
+            <td><%= order_line.product.title %></td>
+            <td>€<%= order_line.product.price %></td>
+            <td>€<%= order_line.subtotal %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total</td>
+          <td><%= order.total_amount %></td>
+          <td colspan="2"></td>
+          <td>€<%= order.total_price %></td>
+        </tr>
+      </tfoot>
+    </table>
   </p>
 
+  <h3>Comment:</h3>
   <p>
-    <strong>Comment:</strong>
     <%= order.comment %>
   </p>
 
