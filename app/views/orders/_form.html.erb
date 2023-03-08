@@ -26,6 +26,25 @@
     <%= form.telephone_field :phone %>
   </div>
 
+  <table>
+    <thead>
+    <th>Amount</th>
+    <th>Product</th>
+    <th>Unit price</th>
+    </thead>
+    <tbody>
+      <%= form.fields_for :order_lines do |order_line_form| %>
+        <% order_line = order_line_form.object %>
+        <tr>
+          <%= order_line_form.hidden_field :product_id %>
+          <td><%= order_line_form.number_field :amount, min: 0, max: 10 %></td>
+          <td><%= order_line.product.title %></td>
+          <td>€<%= order_line.product.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
   <div>
     <%= form.label :comment, style: "display: block" %>
     <%= form.text_area :comment %>
