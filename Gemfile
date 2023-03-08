@@ -24,6 +24,7 @@ gem 'paper_trail'
 gem 'paper_trail-association_tracking'
 gem 'devise-i18n'
 gem 'rails-i18n', '~> 7.0.0'
+gem 'rails_admin-i18n'
 
 gem 'phonelib'
 gem 'stripe-rails'

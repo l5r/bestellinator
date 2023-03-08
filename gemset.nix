@@ -1189,6 +1189,18 @@
     targets = [];
     version = "3.1.1";
   };
+  rails_admin-i18n = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1hz5d9zbmfkzpjdwcm43hvaiddhqws7h03bvhj8ldagkr2flgf7s";
+      target = "ruby";
+      type = "gem";
+    };
+    targets = [];
+    version = "1.18.0";
+  };
   railties = {
     dependencies = ["actionpack" "activesupport" "method_source" "rake" "thor" "zeitwerk"];
     groups = ["default" "development" "test"];
