@@ -16,6 +16,8 @@ class OrderForm < ApplicationRecord
   has_rich_text :thanks
   has_paper_trail
 
+  accepts_nested_attributes_for :products
+
   scope :submittable, -> { where("opens_at < now() AND now() < closes_at") }
 
   validates :title, presence: true
