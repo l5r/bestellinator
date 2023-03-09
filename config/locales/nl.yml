@@ -11,6 +11,11 @@ nl:
         phone: Telefoon
         comment: Opmerking
         order_lines: Inhoud van de bestelling
+      order_form:
+        closes_at: Sluit om
+        opens_at: Opent om
+        title: Titel
+        iban: IBAN
       order_line:
         amount: Aantal
         product: Product

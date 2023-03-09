@@ -4,6 +4,7 @@
 #
 #  id         :uuid             not null, primary key
 #  closes_at  :datetime
+#  iban       :string
 #  opens_at   :datetime
 #  title      :string
 #  created_at :datetime         not null

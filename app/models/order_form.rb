@@ -4,6 +4,7 @@
 #
 #  id         :uuid             not null, primary key
 #  closes_at  :datetime
+#  iban       :string
 #  opens_at   :datetime
 #  title      :string
 #  created_at :datetime         not null
@@ -32,6 +33,9 @@ class OrderForm < ApplicationRecord
   rails_admin do
     list do
       scopes [:submittable, nil]
+      field :title
+      field :opens_at
+      field :closes_at
     end
   end
 end
