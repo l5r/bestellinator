@@ -43,6 +43,8 @@
 
         in
         rec {
+          nodejs = pkgs.nodejs-19_x;
+
           devmode = ruby-nix.presets.devmode;
           finalGemset = devmode // gemset;
 
@@ -89,10 +91,10 @@
           '';
 
           packages.bestellinator = pkgs.stdenv.mkDerivation {
-            inherit name;
+            inherit name nodejs;
 
-            buildInputs = [ env ];
-            nativeBuildInputs = [ pkgs.makeWrapper pkgs.nodejs-19_x ];
+            buildInputs = [ env nodejs ];
+            nativeBuildInputs = [ pkgs.makeWrapper ];
             src = ./.;
             outputs = [ "out" "public" ];
 
@@ -112,6 +114,7 @@
               ln -s /tmp/${name} $out/share/tmp
 
               makeWrapper ${env}/bin/rake $out/bin/${name}-rake \
+                --suffix PATH : $nodejs/bin/ \
                 --set-default RAILS_ENV "$RAILS_ENV" \
                 --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
                 --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
@@ -120,6 +123,7 @@
                 --add-flags "-f $out/share/Rakefile" \
 
               makeWrapper ${env}/bin/puma $out/bin/${name}-puma \
+                --suffix PATH : $nodejs/bin/ \
                 --set-default RAILS_ENV "$RAILS_ENV" \
                 --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
                 --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
@@ -128,6 +132,7 @@
                 --add-flags "$out/share/config.ru" \
 
               makeWrapper ${env}/bin/rails $out/bin/${name}-rails \
+                --suffix PATH : $nodejs/bin/ \
                 --set-default RAILS_ENV "$RAILS_ENV" \
                 --set BUNDLE_WITHOUT "$BUNDLE_WITHOUT" \
                 --run "${pkgs.coreutils}/bin/mkdir -p /tmp/${name}/" \
