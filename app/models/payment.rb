@@ -6,6 +6,7 @@
 #  amount     :decimal(10, 4)   not null
 #  kind       :enum
 #  reference  :string
+#  status     :enum             default("pending"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  order_id   :uuid             not null
@@ -24,5 +25,8 @@ class Payment < ApplicationRecord
 
   enum kind: {
     cash: "cash", wire_transfer: "wire_transfer", stripe: "stripe"
+  }
+  enum status: {
+    pending: "pending", complete: "complete", cancelled: "cancelled"
   }
 end

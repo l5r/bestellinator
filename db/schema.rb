@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_203010) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_175442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_203010) do
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "payment_kind", ["cash", "wire_transfer", "stripe"]
+  create_enum "payment_status", ["pending", "complete", "cancelled"]
 
   create_table "action_text_rich_texts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
@@ -95,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_203010) do
     t.string "reference"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.enum "status", default: "pending", null: false, enum_type: "payment_status"
     t.index ["order_id"], name: "index_payments_on_order_id"
   end
 

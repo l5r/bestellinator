@@ -4,6 +4,7 @@ nl:
       order: Bestelling
       order_form: Bestelformulier
       order_line: Bestelregel
+      payment: Betaling
     attributes:
       order:
         name: Naam
@@ -21,6 +22,12 @@ nl:
         product: Product
         unit_price: Prijs per stuk
         subtotal: Bedrag
+      payment:
+        amount: Bedrag
+        kind: Soort
+        reference: Referentie
+      payment/kind:
+          wire_transfer: Overschrijving
   orders:
     new:
       new_order: Nieuwe bestelling
