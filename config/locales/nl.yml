@@ -24,6 +24,7 @@ nl:
   orders:
     new:
       new_order: Nieuwe bestelling
+      closes_at: "Dit formulier sluit %{closing_time}."
     form:
       errors_prohibited_saving:
         one: "1 fout voorkomt dat uw bestelling geplaatst kan worden"

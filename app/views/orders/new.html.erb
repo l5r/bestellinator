@@ -2,7 +2,12 @@
 <% content_for :breadcrumb do %>
   <li><%= @order.order_form.title %></li>
 <% end %>
-<h1><%= @order.order_form.title %> - <%= t '.new_order' %></h1>
+<hgroup>
+  <h1><%= @order.order_form.title %> - <%= t '.new_order' %></h1>
+  <p>
+    <%= t '.closes_at', closing_time: l(@order.order_form.closes_at, format: :short) %>
+  </p>
+</hgroup>
 
 <p>
   <%= @order.order_form.description %>
