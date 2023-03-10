@@ -25,6 +25,8 @@ class Order < ApplicationRecord
   has_many :payments, dependent: :restrict_with_error
   has_paper_trail
 
+  implicit_order_column = :created_at
+
   before_save :normalize_phone
 
   validates :name, :email, :phone, presence: true

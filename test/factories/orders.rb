@@ -21,10 +21,10 @@
 #
 FactoryBot.define do
   factory :order do
-    order_form { nil }
+    order_form { create(:order_form) }
     name { "MyString" }
-    email { "MyString" }
-    phone { "MyString" }
+    email { "test@example.com" }
+    phone { "015/45 18 25" }
     comment { "MyText" }
   end
 end

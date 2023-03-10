@@ -14,7 +14,12 @@ FactoryBot.define do
   factory :order_form do
     title { "MyString" }
     description { nil }
-    opens_at { "2023-03-07 18:40:18" }
-    closes_at { "2023-03-07 18:40:18" }
+    opens_at { DateTime.yesterday }
+    closes_at { DateTime.tomorrow }
+
+    factory :order_form_closed do
+      opens_at { DateTime.yesterday - 1 }
+      closes_at { DateTime.yesterday }
+    end
   end
 end
