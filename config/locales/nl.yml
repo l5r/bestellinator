@@ -40,5 +40,6 @@ nl:
   order_forms:
     index:
       order_forms: Bestelformulieren
+      open_for: Nog beschikbaar voor %{time_distance}
   total: Totaal
 

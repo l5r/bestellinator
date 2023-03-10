@@ -3,7 +3,7 @@ class OrderFormsController < ApplicationController
 
   # GET /order_forms
   def index
-    @order_forms = OrderForm.submittable
+    @order_forms = OrderForm.submittable.order(closes_at: :asc)
   end
 
   # GET /order_forms/1

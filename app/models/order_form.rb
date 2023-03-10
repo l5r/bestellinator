@@ -17,9 +17,10 @@ class OrderForm < ApplicationRecord
   has_rich_text :thanks
   has_paper_trail
 
-  accepts_nested_attributes_for :products
-
+  implicit_order_column = :closes_at
   scope :submittable, -> { where("opens_at < now() AND now() < closes_at") }
+
+  accepts_nested_attributes_for :products
 
   validates :title, presence: true
 
