@@ -29,7 +29,7 @@ class OrderLine < ApplicationRecord
     amount ||= 0
   end
 
-  validates :amount, presence: true
+  validates :amount, presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :product_id, uniqueness: {scope: :order_id}
 
   def title
