@@ -3,11 +3,15 @@
   inputs = {
     nixpkgs.url = "nixpkgs";
     ruby-nix.url = "github:sagittaros/ruby-nix";
+    bundix = {
+      url = "github:sagittaros/bundix/main";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     bob-ruby.url = "github:bobvanderlinden/nixpkgs-ruby";
     bob-ruby.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = { self, nixpkgs, ruby-nix, bob-ruby, flake-utils }:
+  outputs = { self, nixpkgs, ruby-nix, bundix, bob-ruby, flake-utils }:
     flake-utils.lib.eachSystem [
       "aarch64-darwin"
       "x86_64-darwin"
@@ -19,7 +23,7 @@
 
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ bob-ruby.overlays.default ];
+            overlays = [ ruby-nix.overlays.ruby bob-ruby.overlays.default ];
             # You can now refer to packages like:
             #   pkgs."ruby-3"
             #   pkgs."ruby-2.7"
@@ -57,6 +61,8 @@
           })
             env ruby;
 
+          packages.ruby = pkgs."ruby-3.2.1";
+
           devShells = rec {
             default = dev;
             dev = pkgs.mkShell rec {
@@ -89,6 +95,8 @@
               ${pkgs.postgresql}/bin/pg_ctl start -l $PGLOG -o "--unix_socket_directories='$PGHOST'"
             fi
           '';
+
+          packages.bundix = bundix.packages.${system}.default;
 
           packages.bestellinator = pkgs.stdenv.mkDerivation {
             inherit name nodejs;
