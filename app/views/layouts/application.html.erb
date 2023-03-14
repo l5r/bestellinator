@@ -3,13 +3,13 @@
 <%# to most (but not all) views.                                       %>
 
 
-<main class="container">
-<nav aria-label="breadcrumb">
-  <ul>
-    <li><a href="/">Bestellinator</a></li>
-    <%= yield :breadcrumb %>
-  </ul>
-</nav>
+<main class="container mt-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Bestellinator</a></li>
+      <%= yield :breadcrumb %>
+    </ol>
+  </nav>
   <%= render("shared/flash") %>
   <%= yield %>
 </main>

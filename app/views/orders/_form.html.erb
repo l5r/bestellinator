@@ -1,56 +1,32 @@
-<%= form_with(model: [order_form, order]) do |form| %>
-  <% if order.errors.any? %>
-    <article>
-      <h2><%= t '.errors_prohibited_saving', count: order.errors.count %></h2>
+<%= bootstrap_form_with(model: [order_form, order], layout: :horizontal) do |form| %>
 
-      <ul>
-        <% order.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+  <%= form.text_field :name %>
+  <%= form.email_field :email %>
+  <%= form.telephone_field :phone %>
+
+  <%= form.form_group do %>
+    <table class="table">
+      <thead>
+        <th><%= OrderLine.human_attribute_name :amount %></th>
+        <th><%= OrderLine.human_attribute_name :product %></th>
+        <th><%= OrderLine.human_attribute_name :unit_price %></th>
+      </thead>
+      <tbody>
+        <%= form.fields_for :order_lines do |order_line_form| %>
+          <% order_line = order_line_form.object %>
+          <tr>
+            <%= order_line_form.hidden_field :product_id %>
+            <td><%= order_line_form.number_field :amount, min: 0, max: 10, hide_label: true %></td>
+            <td><%= order_line.product.title %></td>
+            <td>€<%= order_line.product.price %></td>
+          </tr>
         <% end %>
-      </ul>
-    </article>
+      </tbody>
+    </table>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.email_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.telephone_field :phone %>
-  </div>
-
-  <table>
-    <thead>
-    <th><%= OrderLine.human_attribute_name :amount %></th>
-    <th><%= OrderLine.human_attribute_name :product %></th>
-    <th><%= OrderLine.human_attribute_name :unit_price %></th>
-    </thead>
-    <tbody>
-      <%= form.fields_for :order_lines do |order_line_form| %>
-        <% order_line = order_line_form.object %>
-        <tr>
-          <%= order_line_form.hidden_field :product_id %>
-          <td><%= order_line_form.number_field :amount, min: 0, max: 10 %></td>
-          <td><%= order_line.product.title %></td>
-          <td>€<%= order_line.product.price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <div>
-    <%= form.label :comment, style: "display: block" %>
-    <%= form.text_area :comment %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.text_area :comment %>
+  <%= form.form_group do %>
+    <%= form.primary %>
+  <% end %>
 <% end %>

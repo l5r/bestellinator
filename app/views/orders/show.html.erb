@@ -1,8 +1,15 @@
 <% content_for :title, @order.order_form.title %>
+
+<hgroup>
+  <h2><%= t '.order_title', form_title: @order.order_form.title %></h2>
+  <p><%= link_to t('.permalink'), @order %></p>
+</hgroup>
+
 <%= render @order %>
 
-<article>
-  <p>
+<h3><%= t '.payment' %></h3>
+<article class="card">
+  <p class="card-body">
     <%= t '.please_transfer_html', amount: @order.total_price, iban: @order.order_form.iban %>
   </p>
 </article>

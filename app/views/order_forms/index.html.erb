@@ -2,16 +2,16 @@
 
 <h1><%= t '.order_forms' %></h1>
 
-<div id="order_forms">
+<ul id="order_forms" class="list-group list-group-flush">
   <% @order_forms.each do |order_form| %>
     <%= render order_form %>
-    <p>
+    <li class="list-group-item">
       <%= link_to order_form.title, new_order_form_order_path(order_form) %>
       <em>
         <%= time_tag order_form.closes_at, title: order_form.closes_at do %>
           (<%= t '.open_for', time_distance: distance_of_time_in_words(DateTime.now, order_form.closes_at) %>)
         <% end %>
       </em>
-    </p>
+    </li>
   <% end %>
 </div>

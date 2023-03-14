@@ -1,9 +1,4 @@
 <div id="<%= dom_id order %>">
-  <hgroup>
-  <h2><%= t '.order_title', form_title: order.order_form.title %></h2>
-  <h3><%= link_to t('.permalink'), order %></h3>
-  </hgroup>
-
   <p>
     <%= order.order_form.thanks %>
   </p>
@@ -17,7 +12,7 @@
 
   <p>
     <h3><%= t '.order_contents' %></h3>
-    <table>
+    <table class="table">
       <thead>
         <th scope="col"></th>
         <th scope="col"><%= OrderLine.human_attribute_name :amount %></th>
@@ -36,7 +31,7 @@
           </tr>
         <% end %>
       </tbody>
-      <tfoot>
+      <tfoot class="table-group-divider">
         <tr>
           <td><%= t :total %></td>
           <td><%= order.total_amount %></td>
@@ -47,9 +42,11 @@
     </table>
   </p>
 
-  <h3><%= t '.comment' %></h3>
-  <p>
-    <%= order.comment %>
-  </p>
+  <% unless order.comment.blank? %>
+    <h3><%= t '.comment' %></h3>
+    <p>
+      <%= order.comment %>
+    </p>
+  <% end %>
 
 </div>

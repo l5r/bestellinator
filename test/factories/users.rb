@@ -23,6 +23,7 @@
 #
 FactoryBot.define do
   factory :user do
-    
+    email { "test@exapmle.com" }
+    password { "123456" }
   end
 end

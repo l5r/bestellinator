@@ -1,6 +1,6 @@
 <% content_for :title, @order.order_form.title %>
 <% content_for :breadcrumb do %>
-  <li><%= @order.order_form.title %></li>
+  <li class="breadcrumb-item active"><%= @order.order_form.title %></li>
 <% end %>
 <hgroup>
   <h1><%= @order.order_form.title %> - <%= t '.new_order' %></h1>
