@@ -1,27 +1,16 @@
-<div id="<%= dom_id payment %>">
-  <p>
-    <strong>Kind:</strong>
-    <%= payment.kind %>
-  </p>
+<div id="<%= dom_id payment %>" class="card">
+  <h5 class="card-header">
+    <%= Payment.human_attribute_name("kind.#{payment.kind}") %>
+    <span class="badge text-bg-<%= payment_status_to_color payment.status %>">
+      <%= Payment.human_attribute_name("status.#{payment.status}") %>
+    </span>
+  </h5>
 
-  <p>
-    <strong>Amount:</strong>
-    <%= payment.amount %>
-  </p>
-
-  <p>
-    <strong>Order:</strong>
-    <%= payment.order_id %>
-  </p>
-
-  <p>
-    <strong>Reference:</strong>
-    <%= payment.reference %>
-  </p>
-
-  <p>
-    <strong>Comment:</strong>
-    <%= payment.comment %>
-  </p>
-
+  <% case payment.kind %>
+  <% when "wire_transfer" %>
+    <p class="card-body">
+      <%= t '.please_transfer_html', amount: payment.amount, reference: payment.reference, iban: payment.order.order_form.iban %>
+    </p>
+  <% else %>
+  <% end %>
 </div>

@@ -27,7 +27,13 @@ nl:
         kind: Soort
         reference: Referentie
       payment/kind:
-          wire_transfer: Overschrijving
+        wire_transfer: Overschrijving
+        cash: Contant
+        stripe: Via Stripe
+      payment/status:
+        pending: In afwachting
+        complete: Bevestigd
+        cancelled: Geannuleerd
   orders:
     new:
       new_order: Nieuwe bestelling
@@ -39,6 +45,10 @@ nl:
     show:
       order_title: Bestelling %{form_title}
       permalink: Vaste link naar uw bestelling, bewaar deze link om uw bestelling later terug op te vragen.
+      warning_order_unconfirmed:
+        "Waarschuwing: de betaling voor deze bestelling moet nog bevestigd worden!"
+      order_confirmed:
+        "De betaling voor deze bestelling is bevestigd."
       payment: "Betaling:"
       please_transfer_html:
         "Schrijf alstublieft €%{amount} over naar <code>%{iban}</code> om uw bestelling te bevestigen."
@@ -50,5 +60,9 @@ nl:
     index:
       order_forms: Bestelformulieren
       open_for: Nog beschikbaar voor %{time_distance}
+  payments:
+    payment:
+      please_transfer_html:
+        "Schrijf alstublieft €%{amount} over naar <code>%{iban}</code> met mededeling <code>%{reference}</code> om uw bestelling te bevestigen."
   total: Totaal
 

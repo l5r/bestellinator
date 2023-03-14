@@ -21,7 +21,7 @@
 #
 FactoryBot.define do
   factory :payment do
-    kind { "" }
+    kind { "cash" }
     amount { "9.99" }
     order { nil }
     reference { "MyString" }

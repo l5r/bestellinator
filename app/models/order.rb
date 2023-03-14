@@ -28,6 +28,7 @@ class Order < ApplicationRecord
   implicit_order_column = :created_at
 
   before_save :normalize_phone
+  after_create :create_initial_payment
 
   validates :name, :email, :phone, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -52,9 +53,21 @@ class Order < ApplicationRecord
     order_lines.map(&:amount).sum
   end
 
+  def total_paid
+    payments.complete.sum(:amount)
+  end
+
+  def paid?
+    total_paid >= total_price
+  end
+
   private
 
   def normalize_phone
     self.phone = phone(normalized: true)
+  end
+
+  def create_initial_payment
+    payments.wire_transfer.create!(reference: name)
   end
 end

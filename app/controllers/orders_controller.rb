@@ -51,7 +51,9 @@ class OrdersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
-      @order = Order.includes(:order_form, order_lines: :product).find(params[:id])
+      @order = Order
+        .includes(:order_form, :payments, order_lines: :product)
+        .find(params[:id])
     end
 
     def set_order_form
